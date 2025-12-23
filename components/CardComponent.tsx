@@ -67,7 +67,7 @@ export default function CardComponent({
           <p className="text-sm text-muted-foreground">0 upcoming events</p>
         )}
         <div>
-          <Button className="p-5 group-hover:bg-secondary group-hover:text-white">
+          <Button className="p-5 group-hover:bg-secondary hover:bg-secondary group-hover:text-white cursor-pointer">
             View Details
           </Button>
         </div>
