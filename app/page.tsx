@@ -1,5 +1,5 @@
-import React from "react";
+import UpComingEvents from "@/components/sections/UpComingEvents";
 
 export default function Home() {
-  return <div>Home Page</div>;
+  return <UpComingEvents />;
 }
