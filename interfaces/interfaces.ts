@@ -21,3 +21,18 @@ export interface IEvent {
 	category: string;
 	isFeatured?: boolean;
 }
+export interface IVenue {
+	id: string;
+	name: string;
+	location: string;
+	address: string;
+	city: string;
+	capacity: number;
+	image: string;
+	description: string;
+	facilities: string[];
+	latitude: number;
+	longitude: number;
+	isFeatured?: boolean;
+	upcomingEvents?: number;
+}
