@@ -26,18 +26,18 @@ export default function CardComponent({
           className="w-full h-48 object-fit "
         />
         <Badge variant="secondary" className="absolute top-0 right-0 m-4">
-          {!isEvent ? "Concert" : "Featured"}
+          {isEvent ? "Concert" : "Featured"}
         </Badge>
-        {!isEvent && (
+        {isEvent && (
           <Badge className="absolute top-0 left-0 m-4">Featured</Badge>
         )}
       </CardHeader>
       <CardContent>
         <h3 className="text-lg font-semibold mb-3 group-hover:text-secondary">
-          {!isEvent ? "Summer Music Festival 2025" : "Blue Note Jazz Club"}
+          {isEvent ? "Summer Music Festival 2025" : "Blue Note Jazz Club"}
         </h3>
         {!isEvent && (
-          <CardDescription>
+          <CardDescription className="mb-4">
             Intimate jazz club with excellent acoustics and a cozy atmosphere.
             Perfect for live music performances.
           </CardDescription>
@@ -45,18 +45,18 @@ export default function CardComponent({
         <div className="text-sm text-muted-foreground mb-2 flex gap-2 items-center">
           <Calendar className="w-5 h-5 text-secondary" />
           <p>
-            {!isEvent
+            {isEvent
               ? "Jul 15, 2025 at 18:00"
               : "789 Jazz Avenue, San Francisco, CA"}
           </p>
         </div>
         <div className="text-sm text-muted-foreground flex gap-2 items-center">
           <MapPin className="w-5 h-5 text-secondary" />
-          <p>{!isEvent ? "Grand Arena" : "Capacity: 500 people"}</p>
+          <p>{isEvent ? "Grand Arena" : "Capacity: 500 people"}</p>
         </div>
       </CardContent>
       <CardFooter className="pt-0 flex justify-between items-center">
-        {!isEvent ? (
+        {isEvent ? (
           <div>
             <p className="text-sm text-muted-foreground">Starting from</p>
             <span className="font-semibold text-2xl text-secondary">

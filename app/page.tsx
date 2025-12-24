@@ -1,4 +1,6 @@
+"use client";
 import BrowseByCategory from "@/components/sections/BrowseByCategory";
+import HomeVenues from "@/components/sections/HomeVenues";
 import UpComingEvents from "@/components/sections/UpComingEvents";
 
 export default function Home() {
@@ -6,6 +8,7 @@ export default function Home() {
     <div>
       <UpComingEvents />
       <BrowseByCategory />
+      <HomeVenues />
     </div>
   );
 }

@@ -12,19 +12,19 @@ export default function BrowseByCategory() {
         <div className="flex py-4 gap-4 flex-wrap justify-between">
           <CategoryButton
             title="Music"
-            icon={<Headphones className="rounded-circle !w-10 !h-10" />}
+            icon={<Headphones className="rounded-circle w-10! h-10!" />}
           />
           <CategoryButton
             title="Conference"
-            icon={<Sparkles className="rounded-circle !w-10 !h-10" />}
+            icon={<Sparkles className="rounded-circle w-10! h-10!" />}
           />
           <CategoryButton
             title="Workshop"
-            icon={<Hammer className="rounded-circle !w-10 !h-10" />}
+            icon={<Hammer className="rounded-circle w-10! h-10!" />}
           />
           <CategoryButton
             title="Sports"
-            icon={<Volleyball className="rounded-circle !w-10 !h-10" />}
+            icon={<Volleyball className="rounded-circle w-10! h-10!" />}
           />
         </div>
       </div>
