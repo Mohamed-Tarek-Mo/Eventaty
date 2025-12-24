@@ -12,7 +12,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="p-10 bg-primary">
-      <div className="flex flex-wrap justify-between items-center py-10 border-b-2 gap-1 space-y-10 border-muted-foreground">
+      <div className="flex flex-wrap justify-between py-10 border-b-2 gap-1 space-y-10 border-muted-foreground">
         <div className="w-full md:w-2/5 lg:w-3/13 space-y-2">
           <img src="/Logo.svg" alt="logo" className="h-14 mb-6" />
           <p className="text-ring">
