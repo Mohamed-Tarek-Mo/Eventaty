@@ -1,6 +1,7 @@
 import CardComponent from "@/components/CardComponent";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function UpComingEvents() {
   return (
@@ -17,12 +18,13 @@ export default function UpComingEvents() {
           <CardComponent isEvent={true} />
         </div>
       </div>
-
-      <Button className="mx-auto my-10 py-7 flex cursor-pointer">
-        <p className="flex font-normal items-center gap-2 p-6 text-secondary">
-          Explore All Events <ArrowRight />
-        </p>
-      </Button>
+      <Link href='/events'>
+        <Button className="mx-auto my-10 py-7 flex cursor-pointer">
+          <p className="flex font-normal items-center gap-2 p-6 text-secondary">
+            Explore All Events <ArrowRight />
+          </p>
+        </Button>
+      </Link>
     </section>
   );
 }

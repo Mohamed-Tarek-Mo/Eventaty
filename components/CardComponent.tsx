@@ -5,9 +5,8 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import img from "@/public/3.png";
 import { Badge } from "./ui/badge";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, Users } from "lucide-react";
 import { Button } from "./ui/button";
 
 export default function CardComponent({
@@ -17,57 +16,72 @@ export default function CardComponent({
   data?: any;
   isEvent?: boolean;
 }) {
+  const title = isEvent ? (data?.title || "Blue Note Jazz Club") : (data?.name || "Summer Music Festival 2025");
+  const sub = isEvent ? "Featured" : (data?.category || "Venue");
+
+  let dateAndTime = data?.date || 'Will be announced';
+  if (data?.time || !data) {
+    dateAndTime = `${dateAndTime} at ${data?.time || '10:00 PM'}`;
+  }
+
+  const locationOrCapacity = data?.location || (isEvent ? "Grand Arena, Downtown" : "Capacity: 500 people");
+  const price = data?.price || 99.99;
+  // const description = data?.description || "Intimate jazz club with excellent acoustics and a cozy atmosphere. Perfect for live music performances.";
+  const capacity = data?.capacity || 500;
+
   return (
-    <Card className="pt-0 rounded-xl overflow-hidden group">
+    <Card className="pt-0 rounded-xl overflow-hidden group bg-white border-none shadow-sm h-full flex flex-col">
       <CardHeader className="p-0 relative">
         <img
-          src="/ekko.png"
+          src={data?.image || "/ekko.png"}
           alt="Event Image"
-          className="w-full h-48 object-fit "
+          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <Badge variant="secondary" className="absolute top-0 right-0 m-4">
-          {isEvent ? "Concert" : "Featured"}
+        <Badge variant="secondary" className="absolute top-0 right-0 m-4 bg-[#d4af37] text-white hover:bg-[#b5952f] border-none">
+          {sub}
         </Badge>
-        {isEvent && (
-          <Badge className="absolute top-0 left-0 m-4">Featured</Badge>
+        {isEvent && data?.isFeatured && (
+          <Badge className="absolute top-0 left-0 m-4 bg-black/70 text-white hover:bg-black/80 border-none">Hot</Badge>
         )}
       </CardHeader>
-      <CardContent>
-        <h3 className="text-lg font-semibold mb-3 group-hover:text-secondary">
-          {isEvent ? "Summer Music Festival 2025" : "Blue Note Jazz Club"}
+      <CardContent className="flex-grow pt-5">
+        <h3 className="text-lg font-bold mb-3 group-hover:text-[#d4af37] transition-colors line-clamp-1">
+          {title}
         </h3>
-        {!isEvent && (
-          <CardDescription className="mb-4">
-            Intimate jazz club with excellent acoustics and a cozy atmosphere.
-            Perfect for live music performances.
+        {/* {!isEvent && (
+          <CardDescription className="line-clamp-2 mb-4">
+            {description}
           </CardDescription>
-        )}
+        )} */}
         <div className="text-sm text-muted-foreground mb-2 flex gap-2 items-center">
-          <Calendar className="w-5 h-5 text-secondary" />
-          <p>
-            {isEvent
-              ? "Jul 15, 2025 at 18:00"
-              : "789 Jazz Avenue, San Francisco, CA"}
+          {isEvent ? <Calendar className="w-4 h-4 text-[#d4af37]" /> : <MapPin className="w-4 h-4 text-[#d4af37]" />}
+          <p className="text-xs">
+            {isEvent ? dateAndTime : (data?.location || "Unknown Location")}
           </p>
         </div>
         <div className="text-sm text-muted-foreground flex gap-2 items-center">
-          <MapPin className="w-5 h-5 text-secondary" />
-          <p>{isEvent ? "Grand Arena" : "Capacity: 500 people"}</p>
+          {isEvent ? <MapPin className="w-4 h-4 text-[#d4af37]" /> : <Users className="w-4 h-4 text-[#d4af37]" />}
+          <p className="text-xs">{isEvent ? locationOrCapacity : `Capacity: ${capacity}`}</p>
         </div>
       </CardContent>
-      <CardFooter className="pt-0 flex justify-between items-center">
+      <CardFooter className="pb-5 pt-0 flex justify-between items-center mt-auto">
         {isEvent ? (
           <div>
-            <p className="text-sm text-muted-foreground">Starting from</p>
-            <span className="font-semibold text-2xl text-secondary">
-              $99.99
+            <p className="text-xs text-muted-foreground">Starting from</p>
+            <span className="font-bold text-xl text-[#d4af37]">
+              ${typeof price === 'number' ? price.toFixed(2) : price}
             </span>
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">0 upcoming events</p>
+          <div>
+            <p className="text-xs text-muted-foreground">Upcoming Events</p>
+            <span className="font-bold text-xl text-[#d4af37]">
+              {data?.upcomingEvents || 0}
+            </span>
+          </div>
         )}
         <div>
-          <Button className="p-5 group-hover:bg-secondary hover:bg-secondary group-hover:text-white cursor-pointer">
+          <Button className="bg-[#0F172A] text-white hover:bg-[#d4af37] hover:text-white transition-colors rounded-lg px-6">
             View Details
           </Button>
         </div>

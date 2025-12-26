@@ -1,5 +1,7 @@
-import React from "react";
+'use client';
 
-export default function Events() {
-  return <div>Events</div>;
+import EventsList from "@/components/sections/EventsList";
+
+export default function EventsPage() {
+  return <EventsList />;
 }
