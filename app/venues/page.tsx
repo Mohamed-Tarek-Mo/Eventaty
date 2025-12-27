@@ -1,5 +1,7 @@
-import React from "react";
+'use client'
+
+import VenuesList from "@/components/sections/VenuesList";
 
 export default function Venues() {
-  return <div>Venues</div>;
-}
+  return <VenuesList />;
+} 

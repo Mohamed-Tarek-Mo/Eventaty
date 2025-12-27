@@ -119,7 +119,28 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
+/*  */
+
+/* Add this inside the :root { ... } block */
+:root {
+  /* ... existing variables ... */
+  --eventaty-gold: #D4AF37;
+  --eventaty-dark: #0F172A;
+  --eventaty-cream: #FDFBF7;
+}
+
+/* Add this inside the @theme inline { ... } block */
+@theme inline {
+  /* ... existing variables ... */
+  --color-eventaty-gold: var(--eventaty-gold);
+  --color-eventaty-dark: var(--eventaty-dark);
+  --color-eventaty-cream: var(--eventaty-cream);
+}
+
+/*  */

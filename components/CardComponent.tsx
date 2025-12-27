@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -6,7 +7,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Badge } from "./ui/badge";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, Users } from "lucide-react";
 import { Button } from "./ui/button";
 
 export default function CardComponent({
@@ -16,12 +17,12 @@ export default function CardComponent({
   data?: any;
   isEvent?: boolean;
 }) {
-  const title = data?.title || (isEvent ? "Blue Note Jazz Club" : "Summer Music Festival 2025");
-  const sub = isEvent ? "Featured" : (data?.category || "Concert");
+  const title = isEvent ? (data?.title || "Blue Note Jazz Club") : (data?.name || "Summer Music Festival 2025");
+  const sub = isEvent ? "Featured" : (data?.category || "Venue");
 
   let dateAndTime = data?.date || 'Will be announced';
-  if (data?.time) {
-    dateAndTime = `${dateAndTime} at ${data.time}`;
+  if (data?.time || !data) {
+    dateAndTime = `${dateAndTime} at ${data?.time || '10:00 PM'}`;
   }
 
   const locationOrCapacity = data?.location || (isEvent ? "Grand Arena, Downtown" : "Capacity: 500 people");
@@ -40,7 +41,7 @@ export default function CardComponent({
         <Badge variant="secondary" className="absolute top-0 right-0 m-4 bg-[#d4af37] text-white hover:bg-[#b5952f] border-none">
           {sub}
         </Badge>
-        {!isEvent && data?.isFeatured && (
+        {isEvent && data?.isFeatured && (
           <Badge className="absolute top-0 left-0 m-4 bg-black/70 text-white hover:bg-black/80 border-none">Hot</Badge>
         )}
       </CardHeader>
@@ -54,14 +55,14 @@ export default function CardComponent({
           </CardDescription>
         )} */}
         <div className="text-sm text-muted-foreground mb-2 flex gap-2 items-center">
-          <Calendar className="w-4 h-4 text-[#d4af37]" />
+          {isEvent ? <Calendar className="w-4 h-4 text-[#d4af37]" /> : <MapPin className="w-4 h-4 text-[#d4af37]" />}
           <p className="text-xs">
-            {dateAndTime}
+            {isEvent ? dateAndTime : (data?.location || "Unknown Location")}
           </p>
         </div>
         <div className="text-sm text-muted-foreground flex gap-2 items-center">
-          <MapPin className="w-4 h-4 text-[#d4af37]" />
-          <p className="text-xs">{locationOrCapacity}</p>
+          {isEvent ? <MapPin className="w-4 h-4 text-[#d4af37]" /> : <Users className="w-4 h-4 text-[#d4af37]" />}
+          <p className="text-xs">{isEvent ? locationOrCapacity : `Capacity: ${capacity}`}</p>
         </div>
       </CardContent>
       <CardFooter className="pb-5 pt-0 flex justify-between items-center mt-auto">
@@ -74,16 +75,18 @@ export default function CardComponent({
           </div>
         ) : (
           <div>
-            <p className="text-xs text-muted-foreground">Capacity</p>
+            <p className="text-xs text-muted-foreground">Upcoming Events</p>
             <span className="font-bold text-xl text-[#d4af37]">
-              {capacity} people
+              {data?.upcomingEvents || 0}
             </span>
           </div>
         )}
         <div>
-          <Button className="bg-[#0F172A] text-white hover:bg-[#d4af37] hover:text-white transition-colors rounded-lg px-6">
-            View Details
-          </Button>
+          <Link href={isEvent ? `/events/${data?.id}` : `/venues/${data?.id}`} className="w-full">
+            <Button className="bg-[#0F172A] text-white hover:bg-[#d4af37] hover:text-white transition-colors rounded-lg px-6 w-full">
+              View Details
+            </Button>
+          </Link>
         </div>
       </CardFooter>
     </Card>
