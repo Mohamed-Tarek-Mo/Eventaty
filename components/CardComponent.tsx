@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -81,9 +82,11 @@ export default function CardComponent({
           </div>
         )}
         <div>
-          <Button className="bg-[#0F172A] text-white hover:bg-[#d4af37] hover:text-white transition-colors rounded-lg px-6">
-            View Details
-          </Button>
+          <Link href={isEvent ? `/events/${data?.id}` : `/venues/${data?.id}`} className="w-full">
+            <Button className="bg-[#0F172A] text-white hover:bg-[#d4af37] hover:text-white transition-colors rounded-lg px-6 w-full">
+              View Details
+            </Button>
+          </Link>
         </div>
       </CardFooter>
     </Card>
