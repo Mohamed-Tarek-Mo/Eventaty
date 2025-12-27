@@ -4,31 +4,23 @@ import React, { useState } from 'react';
 import { Ticket } from 'lucide-react';
 import TicketCard from '@/components/ui/ticket';
 import TicketSelectionModal from '@/components/ui/TicketSelectionModal';
-
-interface TicketType {
-    id: string;
-    name: string;
-    description: string;
-    priceMultiplier: number;
-    features: string[];
-    price?: number;
-}
+import { ITicket } from '@/interfaces/interfaces';
 
 interface TicketsSectionProps {
     eventPrice: number;
-    ticketTypes: TicketType[];
+    ticketTypes: ITicket[];
 }
 
 export default function TicketsSection({ eventPrice, ticketTypes }: TicketsSectionProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedTicket, setSelectedTicket] = useState<TicketType | null>(null);
+    const [selectedTicket, setSelectedTicket] = useState<ITicket | null>(null);
 
-    const handleTicketClick = (ticket: TicketType) => {
+    const handleTicketClick = (ticket: ITicket) => {
         setSelectedTicket(ticket);
         setIsModalOpen(true);
     };
 
-    const calculatePrice = (ticket: TicketType) => {
+    const calculatePrice = (ticket: ITicket) => {
         if (ticket.price) return ticket.price;
         return eventPrice * ticket.priceMultiplier;
     };

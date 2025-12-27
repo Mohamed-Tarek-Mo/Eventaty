@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, Minus, Plus } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface TicketSelectionModalProps {
     isOpen: boolean;
@@ -15,11 +16,17 @@ export default function TicketSelectionModal({
     price = 0
 }: TicketSelectionModalProps) {
     const [count, setCount] = useState(1);
+    const router = useRouter();
 
     if (!isOpen) return null;
 
     const handleIncrement = () => setCount((prev) => prev + 1);
     const handleDecrement = () => setCount((prev) => (prev > 1 ? prev - 1 : 1));
+
+    const handleBuyNow = () => {
+        // Navigate to booking page, potentially passing params in real app
+        router.push('/booking');
+    };
 
     return (
         <div
@@ -62,6 +69,7 @@ export default function TicketSelectionModal({
 
                     {/* Buy Button */}
                     <button
+                        onClick={handleBuyNow}
                         className="w-full bg-[#d4af37] text-white font-medium text-lg py-4 rounded-full shadow-[0_4px_14px_0_rgba(212,175,55,0.39)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.23)] hover:-translate-y-0.5 transition-all mb-6"
                     >
                         Buy Now
